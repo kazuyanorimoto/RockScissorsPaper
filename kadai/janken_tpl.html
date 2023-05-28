@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/sample2.css">
+
+    <title>じゃんけん</title>
+</head>
+<body>
+    <header> 
+        <h1>じゃんけん</h1>
+    </header>
+    <h2>あなたの<ruby>手<rt>て</rt></ruby>を<ruby>選<rt>えら</rt></ruby>んでね</h2>
+    <section>
+        <ul>
+            <li onclick="rsp(0)">グー</li>
+            <li onclick="rsp(1)">チョキ</li>
+            <li onclick="rsp(2)">パー</li>
+        </ul>
+        <h2 id="message1"><ruby>相手<rt>あいて</rt></ruby>の<ruby>出<rt>だ</rt></ruby>した<ruby>手<rt>て</rt></ruby>は・・・<span id="cpu"></span></h2>
+        <h2 id="message2"><ruby>結果<rt>けっか</rt></ruby>は・・・<span id="finalanswer"></span></h2>
+
+    </section>
+    </div>
+    <script>
+    //配列に結果を挿入する//
+    //jans[0]="グー",jans[1]="チョキ",jans[2]="パー"//
+    
+
+    // rsp(0):グー,rsp(1)チョキ,rsp(2)パー //
+    function rsp(playerSelect) {
+        let result;
+        let playerSelectHand;
+        let comSelectHand;
+        let resultString;
+        let random = Math.random();
+        let comSelect = Math.floor(random * 3);
+        console.log(comSelect);
+        console.log(playerSelect);
+
+     // 0:lose, 1:win, 2:again//
+    if (playerSelect == comSelect) { //"2:あいこ"の挙動//
+        result = 2;
+    } else {
+        if (playerSelect == 0) { //あなた：グー//
+            if (comSelect == 1) { //相手：チョキ//
+                result = 1;//結果：勝ち//
+            } else { //相手：パー//
+                result = 0;//結果：負け//
+            }
+        } else if (playerSelect == 1) { //あなた：チョキ//
+            if (comSelect == 0) { //相手：グー//
+                result = 0; //結果：負け//
+            } else { //相手：パー//
+                result = 1; //結果：勝ち//
+            }
+        } else { //あなた：パー//
+            if (comSelect == 0) { //相手：グー//
+                result = 1; //結果：勝ち//
+            } else { //相手：チョキ//
+                result = 0; //結果：勝ち//
+            }
+        }
+    }
+    console.log(result);
+    if (playerSelect == 0) {
+        playerSelectHand = 'グー';
+    } else if (playerSelect == 1) {
+        playerSelectHand = 'チョキ';
+    } else {
+        playerSelectHand = 'パー';
+    }
+    if (comSelect == 0) {
+        comSelectHand = 'グー';
+    } else if (comSelect == 1) {
+        comSelectHand = 'チョキ';
+    } else {
+        comSelectHand = 'パー';
+    }
+    if (result == 0) {
+        resultString = '負け';
+    } else if (result == 1) {
+        resultString = '勝ち';
+    } else {
+        resultString = 'あいこ';
+    }
+    
+    document.getElementById("message1").innerHTML="相手の出した手は・・・"+comSelectHand;
+    document.getElementById("message2").innerHTML="結果は・・・"+resultString;
+}
+    </script>
+
+
+
+
+
+</body>
+</html>
